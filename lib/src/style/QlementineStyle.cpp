@@ -437,8 +437,12 @@ void QlementineStyle::drawPrimitive(PrimitiveElement pe, const QStyleOption* opt
       if (const auto* optPanelLineEdit = qstyleoption_cast<const QStyleOptionFrame*>(opt)) {
         auto radiusAllAngles = true;
         const auto parentSpinBox = qobject_cast<const QAbstractSpinBox*>(w->parentWidget());
-        if (parentSpinBox && parentSpinBox->buttonSymbols() != QAbstractSpinBox::NoButtons) {
-          radiusAllAngles = false;
+        const auto dateTimeEdit = qobject_cast<const QDateTimeEdit*>(w->parentWidget());
+        bool requiresCalendar = dateTimeEdit && dateTimeEdit->calendarPopup();
+
+        if ((parentSpinBox && parentSpinBox->buttonSymbols() != QAbstractSpinBox::NoButtons) ||
+            requiresCalendar) {
+           radiusAllAngles = false;
         }
 
         const auto& rect = optPanelLineEdit->rect;
@@ -2982,7 +2986,7 @@ QRect QlementineStyle::subControlRect(ComplexControl cc, const QStyleOptionCompl
           case SC_ComboBoxEditField: {
             const auto indicatorSize = _impl->theme.iconSize;
             const auto spacing = _impl->theme.spacing;
-            const auto editFieldW = comboBoxOpt->rect.width() - spacing * 2 + indicatorSize.width();
+            const auto editFieldW = comboBoxOpt->rect.width() - (spacing * 2 + indicatorSize.width());
             return QRect{ comboBoxOpt->rect.x(), comboBoxOpt->rect.y(), editFieldW, comboBoxOpt->rect.height() };
           } break;
           case SC_ComboBoxFrame: {
