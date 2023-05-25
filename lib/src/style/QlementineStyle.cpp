@@ -1492,8 +1492,8 @@ void QlementineStyle::drawControl(ControlElement ce, const QStyleOption* opt, QP
           const auto colorize = QlementineStyle::isAutoIconColorEnabled(w);
           const auto& colorizedPixmap = colorize ? getColorizedPixmap(pixmap, fgColor) : pixmap;
           const auto pixmapPixelRatio = colorizedPixmap.devicePixelRatio();
-          const auto pixmapW = pixmapPixelRatio != 0 ? (int) ((qreal) colorizedPixmap.width() / pixmapPixelRatio) : 0;
-          const auto pixmapH = pixmapPixelRatio != 0 ? (int) ((qreal) colorizedPixmap.height() / pixmapPixelRatio) : 0;
+          const auto pixmapW = pixmapPixelRatio != 0 ? colorizedPixmap.width() : 0;
+          const auto pixmapH = pixmapPixelRatio != 0 ? colorizedPixmap.height() : 0;
           const auto iconOnly = buttonStyle == Qt::ToolButtonIconOnly;
           const auto pixmapX = iconOnly ? availableX + (availableW - pixmapW) / 2 : availableX;
           const auto pixmapY = rect.y() + (rect.height() - pixmapH) / 2;
