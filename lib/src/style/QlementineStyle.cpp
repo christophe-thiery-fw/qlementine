@@ -2736,12 +2736,17 @@ void QlementineStyle::drawComplexControl(ComplexControl cc, const QStyleOptionCo
           p->drawText(textRect, textFlags, elidedText);
         }
 
+        /* 
+        This is drawing the gray line in the frame reported as bug, 
+        We should discuss if it is a bug or we keep it
+        */
+       
         // Frame
-        const auto frameRect = subControlRect(CC_GroupBox, opt, SC_GroupBoxFrame, w);
-        QStyleOptionFrame frameOpt;
-        frameOpt.QStyleOption::operator=(*groupBoxOpt);
-        frameOpt.rect = frameRect;
-        drawPrimitive(PE_FrameGroupBox, &frameOpt, p, w);
+        // const auto frameRect = subControlRect(CC_GroupBox, opt, SC_GroupBoxFrame, w);
+        // QStyleOptionFrame frameOpt;
+        // frameOpt.QStyleOption::operator=(*groupBoxOpt);
+        // frameOpt.rect = frameRect;
+        // drawPrimitive(PE_FrameGroupBox, &frameOpt, p, w);
       }
       return;
     case CC_MdiControls:
